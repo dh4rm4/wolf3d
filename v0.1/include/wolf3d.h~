@@ -1,0 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
+/*   Updated: 2016/11/08 08:38:05 by kboddez          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef WOLF3D_H
+# define WOLF3D_H
+
+/*
+**	INCLUDES
+*/
+# include "../libft/libft.h"
+
+/*
+**	CHANGING VALUES
+*/
+# define SIZE_WALL 64
+
+
+/*
+**	GRAPHICAL MACROS
+*/
+# define MLX fctl->mlx
+# define WIN fctl->win
+# define IMG fctl->img
+# define ADDR fctl->addr
+# define WIN_X fctl->win_x
+# define WIN_Y fctl->win_y
+# define BPP fctl->bpp
+# define ENDIAN fctl->endian
+
+/*
+**	MOVMENT MACROS
+*/
+# define POS_X wf->pos_x
+# define POS_Y wf->pos_y
+# define V_X wf->v_x
+# define V_Y wf->v_y
+# define PLAN_X wf->plan_x
+# define PLAN_Y wf->plan_y
+# define FRAME wf->frame
+# define FRAME_O wf->frame_o
+
+typedef struct  s_complex
+{
+	double      r;
+	double      i;
+}               t_complex;
+
+typedef struct	s_wolf
+{
+	void        *mlx;
+	void        *win;
+	void        *img;
+	char        *addr;
+	int         win_x;
+	int         win_y;
+	int         bpp;
+	int         endian;
+
+
+}				t_wolf;
+
+typedef struct
+
+
+
+#endif
