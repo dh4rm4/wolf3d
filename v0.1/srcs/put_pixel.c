@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 13:40:53 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/09 15:49:39 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/12 14:34:42 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void		put_pixel(int x, t_wolf *wolf)
 	int i;
 	int	j;
 
-
 	j = XI - 1;
+//	printf("XI = %d\nXF = %d\n\n", XI, XF);
+//	COLOR = 0xFF0000;
+//i = (SLINE * (int)((PROJP_HIGH + j) / 2)) + ((int)CAMX * (BPP / 8));
 	while (++j < XF)
 	{
-		i = (SLINE * (int)(PROJP_HIGH / 2)) + ((int)x * (BPP / 8));
+		i = (SLINE * j) + (x * (BPP / 8));
 		if (ENDIAN == 0)
 		{
 			ADDR[i] = mlx_get_color_value(MLX, COLOR);

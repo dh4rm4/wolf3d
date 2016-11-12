@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/12 14:45:57 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/12 13:39:14 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@
 # define SIDE wolf->side //DETERMINE SI LE MUR EST PARALLELE (=0) OU PERPENDICULAIRE (=1)
 # define LINE_H wolf->line_h // = lineHeight
 //DRAW
-# define XI wolf->xi // = drawStart
-# define XF wolf->xf // = drawEnd
+# define XI wolf->xi
+# define XF wolf->xf
+# define YI wolf->yi // = drawStart
+# define YF wolf->yf // = drawEnd
 # define TEXT_NUM wolf->text_num // = texNum
 # define WALL_X wolf->wall_x // = wallx
 # define TEXT_X wolf->text_x // = texX
@@ -142,6 +144,7 @@ typedef struct	s_wolf
 	double		time;
 	double		prev_time;
 	double		camx;
+
 	double		ray_px;
 	double		ray_py;
 	double		ray_dx;
@@ -162,14 +165,7 @@ typedef struct	s_wolf
 //DRAW
 	int			xi;
 	int			xf;
-//	int			yi;
-//	int			yf;
-//	int			text_num;
 	double		wall_x;
-//	int			text_x;
-//	int			text_y;
-	int			d;
-	int			y;
 }				t_wolf;
 
 void	start(t_wolf *wolf);

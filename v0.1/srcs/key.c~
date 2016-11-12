@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 11:03:01 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/12 15:06:30 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/12 15:04:14 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	movement(int k, t_wolf *wolf)
 	if (k == 124)
 	{
 		DOLD_X = D_X;
-		D_X = (D_X * cos(ROT_SPD) - D_Y * sin(ROT_SPD));
-		D_Y = (DOLD_X * sin(ROT_SPD) + D_Y * cos(ROT_SPD));
+		D_X = (D_X * cos(ROT_SPD) - D_Y * sin(ROT_SPD)) / 2;
+		D_Y = (DOLD_X * sin(ROT_SPD) + D_Y * cos(ROT_SPD)) / 2;
 		OLD_PLANX = PLANX;
-		PLANX = (PLANX * cos(ROT_SPD) - PLANY * sin(ROT_SPD));
-		PLANY = (OLD_PLANX * sin(ROT_SPD) + PLANY * cos(ROT_SPD));
+		PLANX = (PLANX * cos(ROT_SPD) - PLANY * sin(ROT_SPD)) / 2;
+		PLANY = (OLD_PLANX * sin(ROT_SPD) + PLANY * cos(ROT_SPD)) / 2;
 	}
 	else if (k == 123)
 	{

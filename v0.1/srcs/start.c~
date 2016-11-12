@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 10:25:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/09 09:32:37 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/11 15:53:26 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	new_graph(t_wolf *wolf)
 {
 	IMG = mlx_new_image(MLX, WIN_X, WIN_Y);
 	ADDR = mlx_get_data_addr(IMG, &BPP, &SLINE, &ENDIAN);
+	algo(wolf);
 	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	mlx_destroy_image(MLX, IMG);
 }
@@ -30,6 +31,7 @@ void	new_graph(t_wolf *wolf)
 
 void	start(t_wolf *wolf)
 {
+	printf("MAPX = %d\nMAPY = %d\n", MAPX, MAPY);
 	map(wolf);
 	initialisation(wolf);
 	MLX = mlx_init();

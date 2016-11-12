@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/09 15:41:53 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/12 13:39:14 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,19 @@
 # define SIZE_WALL 64
 # define FOV 60
 # define P_HEIGHT 32
-# define PROJP_WIDE 320
-# define PROJP_HIGH 200
-# define PROJ_CTRW 160
-# define PROJ_CTRH 100
-# define WIN_X 1600
-# define WIN_Y 1000
+# define PROJP_WIDE 640
+# define PROJP_HIGH 400
+# define WIN_X 640
+# define WIN_Y 400
+# define LINE_SIZE 15
+# define FRAME 50
+# define ROT_SPD (3.0 * FRAME)
 
 /*
 ** INVARIABLE VALUES
 */
 # define PI 3.14159
 # define PHI 1.61803
-/*# define AG_60 PROJP_WIDE
-# define AG_30 (AG_60 /2)
-# define AG_15 (AG_60 / 4)
-# define AG_90 (AG_30 * 3)
-# define AG_180 (AG_60 * 3)
-# define AG_270 (AG_90 * 3)
-*/
 
 /*
 **	GRAPHICAL MACROS
@@ -63,35 +57,48 @@
 **	MOVMENT MACROS
 */
 # define MAP wolf->map
-# define P_X  wolf->plyr.x  // = posX
+// ================================
+// PLAYER VECTOR
+# define P_X  wolf->plyr.x  // = posX REPRESENT THE POSITION OF THE PLAYER
 # define P_Y  wolf->plyr.y  // = posY
-# define D_X wolf->dirx 	// = dirX
-# define D_Y wolf->diry	// = dirY
-# define PLANX wolf->planx 	// = planeX
+# define D_X wolf->d_x 	// = dirX REPRESENT THE DIRECTION OF THE PLAYER
+# define DOLD_X wolf->dold_x // = oldDirX
+# define D_Y wolf->d_y	// = dirY
+# define PLANX wolf->planx 	// = planeX CAMERA PLANE OF THE PLAYER
+# define OLD_PLANX wolf->old_planx // = oldPlanX
 # define PLANY wolf->plany 	// = planeY
+// =================================
+// ONLY FOR MOVEMENT
 # define TIME wolf->time
 # define P_TIME wolf->prev_time // = oldTime
-# define CAMX wolf->camx	// = cameraX
+// =================================
+# define CAMX wolf->camx	// = cameraX POSITION SUR LE PLAN CAM [0-319]
+// =================================
+// RAY INFO
 # define RAY_PX wolf->ray_px // = rayPosX
 # define RAY_PY wolf->ray_py // = rayPosY
 # define RAY_DX wolf->ray_dx // = rayDireX
 # define RAY_DY wolf->ray_dy // = rayDireY
-// RAY INFO
-# define MAPX wolf->mapx // = mapX
+# define MAPX wolf->mapx // = mapX	POSITION ACTUELLE DE RAY DNAS LA MAP
 # define MAPY wolf->mapy // = mapY
-# define SIDE_DX wolf->side_dx // = sideDistX
-# define SIDE_DY wolf->side_dy // = sideDistY
-# define DELTA_DX wolf->delta_dx // = deltaDistX
-# define DELTA_DY wolf->delta_dy // = deltaDistY
-# define PERP_WALL_DIST wolf->perp_wall_dist // = perpWallDist
-# define STEP_X wolf->step_x // = stepX
-# define STEP_Y wolf->step_y // = stepY
-# define HIT wolf->hit
-# define SIDE wolf->side
+# define PWALL_DIST wolf->perp_wall_dist // = perpWallDist (PERMET DE CALCULER LA TAILLE DE RAY et DONC LA TAILLE DE LA COLONNE A AFFICHER)
+// =================================
+// DISTANCE ENTRE CHQUE LIGNE D'INTERSECTION
+# define SIDE_DX wolf->side_dx // = sideDistX INTERSECTION WITH Y
+# define SIDE_DY wolf->side_dy // = sideDistY INTERSECTION WITH X
+# define DELTA_DX wolf->delta_dx // = deltaDistX DISTANCE ENTRE DEUX COLONNES
+# define DELTA_DY wolf->delta_dy // = deltaDistY DISTANCE ENTRE DEUX LIGNES
+// =================================
+# define STEP_X wolf->step_x // = stepX	PERMET DE CONNAITRE LA DIRECTION DE P_X (1 || -1)
+# define STEP_Y wolf->step_y // = stepY PERMET DE CONNAITRE LA DIRECTION DE P_Y (1 || -1)
+# define HIT wolf->hit //(1 || 0) SI MUR EN FACE DE RAY
+# define SIDE wolf->side //DETERMINE SI LE MUR EST PARALLELE (=0) OU PERPENDICULAIRE (=1)
 # define LINE_H wolf->line_h // = lineHeight
 //DRAW
-# define XI wolf->xi // = drawStart
-# define XF wolf->xf // = drawEnd
+# define XI wolf->xi
+# define XF wolf->xf
+# define YI wolf->yi // = drawStart
+# define YF wolf->yf // = drawEnd
 # define TEXT_NUM wolf->text_num // = texNum
 # define WALL_X wolf->wall_x // = wallx
 # define TEXT_X wolf->text_x // = texX
@@ -125,12 +132,14 @@ typedef struct	s_wolf
 	int			sline;
 	int			color;
 
-	int			map[15][15];
+	int			map[24][24];
 	t_pov		plyr;
 	double		dist_wall;
-	double		dirx;
-	double		diry;
+	double		d_x;
+	double		dold_x;
+	double		d_y;
 	double		planx;
+	double		old_planx;
 	double		plany;
 	double		time;
 	double		prev_time;
@@ -155,17 +164,22 @@ typedef struct	s_wolf
 //DRAW
 	int			xi;
 	int			xf;
-	int			text_num;
+//	int			yi;
+//	int			yf;
+//	int			text_num;
 	double		wall_x;
-	int			text_x;
-	int			text_y;
+//	int			text_x;
+//	int			text_y;
 	int			d;
 	int			y;
 }				t_wolf;
 
 void	start(t_wolf *wolf);
+void	new_graph(t_wolf *wolf);
 void	map(t_wolf *wolf);
 void	initialisation(t_wolf *wolf);
+
+void	algo(t_wolf *wolf);
 
 int		echap(t_wolf *wolf);
 int		key(int k, t_wolf *wolf);
