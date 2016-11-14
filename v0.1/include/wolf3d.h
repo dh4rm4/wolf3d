@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/12 14:45:57 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/14 16:47:53 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@
 # define WIN_X 640
 # define WIN_Y 400
 # define LINE_SIZE 15
-# define FRAME 50
+# define FRAME 0.025
 # define ROT_SPD (3.0 * FRAME)
-
+# define MOVE_SPD (20.0 * FRAME)
 /*
 ** INVARIABLE VALUES
 */
 # define PI 3.14159
 # define PHI 1.61803
+# define ECHAP 53
+# define MOVE_LEFT 123
+# define MOVE_RIGHT 124
+# define MOVE_DOWN 125
+# define MOVE_UP 126
 
 /*
 **	GRAPHICAL MACROS

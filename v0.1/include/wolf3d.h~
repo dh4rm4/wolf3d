@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/12 13:39:14 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/14 10:07:42 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 # define WIN_X 640
 # define WIN_Y 400
 # define LINE_SIZE 15
-# define FRAME 50
+# define FRAME 0.025
 # define ROT_SPD (3.0 * FRAME)
-
+# define MOVE_SPD (20.0 * FRAME)
 /*
 ** INVARIABLE VALUES
 */
@@ -95,10 +95,8 @@
 # define SIDE wolf->side //DETERMINE SI LE MUR EST PARALLELE (=0) OU PERPENDICULAIRE (=1)
 # define LINE_H wolf->line_h // = lineHeight
 //DRAW
-# define XI wolf->xi
-# define XF wolf->xf
-# define YI wolf->yi // = drawStart
-# define YF wolf->yf // = drawEnd
+# define XI wolf->xi // = drawStart
+# define XF wolf->xf // = drawEnd
 # define TEXT_NUM wolf->text_num // = texNum
 # define WALL_X wolf->wall_x // = wallx
 # define TEXT_X wolf->text_x // = texX
