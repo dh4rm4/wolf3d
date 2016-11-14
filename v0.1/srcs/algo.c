@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:06:39 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/14 17:40:00 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/14 18:35:48 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,13 @@ static void	calc_dist(t_wolf *wolf)
 	if (RAY_DY < 0)
 	{
 		STEP_Y = -1;
-		SIDE_DY = (RAY_PX - MAPY) * DELTA_DY;
+		SIDE_DY = (RAY_PY - MAPY) * DELTA_DY;
 	}
 	else
 	{
 		STEP_Y = 1;
 		SIDE_DY = (MAPY + 1.0 - RAY_PY) * DELTA_DY;
 	}
-	if (SIDE == 0)
-		PWALL_DIST = (MAPX - RAY_PX + (1 - STEP_X) / 2) / RAY_DX;
-	else
-		PWALL_DIST = (MAPY - RAY_PY + (1 - STEP_Y) / 2) / RAY_DY;
-	PWALL_DIST /= 10;
 }
 
 static void	find_wall(t_wolf *wolf)
