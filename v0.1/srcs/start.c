@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 10:25:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/11 15:55:43 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/15 09:53:22 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void	new_graph(t_wolf *wolf)
 
 void	start(t_wolf *wolf)
 {
-	map(wolf);
 	initialisation(wolf);
+	map(wolf);
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, WIN_X, WIN_Y, "wolf3d");
 	new_graph(wolf);
-	mlx_key_hook(WIN, key, wolf);
 	mlx_hook(WIN, 17, (1L << 17), echap, wolf);
+	mlx_hook(WIN, 2, (1L << 0), press, wolf);
+	mlx_hook(WIN, 3, (1L << 1), release_key, wolf);
 	mlx_loop(MLX);
 }

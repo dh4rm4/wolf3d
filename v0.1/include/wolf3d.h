@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:12:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/14 16:47:53 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/15 10:43:31 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 # define SIZE_WALL 64
 # define FOV 60
 # define P_HEIGHT 32
-# define PROJP_WIDE 640
-# define PROJP_HIGH 400
-# define WIN_X 640
-# define WIN_Y 400
+# define PROJP_WIDE 1600
+# define PROJP_HIGH 1200
+# define WIN_X 1600
+# define WIN_Y 1200
 # define LINE_SIZE 15
 # define FRAME 0.025
 # define ROT_SPD (3.0 * FRAME)
-# define MOVE_SPD (20.0 * FRAME)
+# define MOVE_SPD_VAL (20.0 * FRAME)
 /*
 ** INVARIABLE VALUES
 */
@@ -59,6 +59,11 @@
 # define COLOR wolf->color
 
 /*
+**	SOUNDS MACROS
+*/
+# define FOOTSTEPS wolf->footsteps
+
+/*
 **	MOVMENT MACROS
 */
 # define MAP wolf->map
@@ -72,10 +77,6 @@
 # define PLANX wolf->planx 	// = planeX CAMERA PLANE OF THE PLAYER
 # define OLD_PLANX wolf->old_planx // = oldPlanX
 # define PLANY wolf->plany 	// = planeY
-// =================================
-// ONLY FOR MOVEMENT
-# define TIME wolf->time
-# define P_TIME wolf->prev_time // = oldTime
 // =================================
 # define CAMX wolf->camx	// = cameraX POSITION SUR LE PLAN CAM [0-319]
 // =================================
@@ -106,8 +107,7 @@
 # define WALL_X wolf->wall_x // = wallx
 # define TEXT_X wolf->text_x // = texX
 # define TEXT_Y wolf->text_y // = texY
-# define D wolf->d
-# define Y wolf->y
+# define MOVE_SPD wolf->move_spd
 
 typedef struct	s_pov
 {
@@ -124,6 +124,9 @@ typedef struct	s_complex
 
 typedef struct	s_wolf
 {
+/*
+**	MLX VARIABLES
+*/
 	void        *mlx;
 	void        *win;
 	void        *img;
@@ -133,9 +136,11 @@ typedef struct	s_wolf
 	int         bpp;
 	int         endian;
 	int			sline;
-	int			color;
 
-	int			map[24][24];
+/*
+**	PLAYER AND MAP INFOS
+*/
+	int			map[20][20];
 	t_pov		plyr;
 	double		dist_wall;
 	double		d_x;
@@ -144,16 +149,17 @@ typedef struct	s_wolf
 	double		planx;
 	double		old_planx;
 	double		plany;
-	double		time;
-	double		prev_time;
+	double		move_spd;
+	int			mapx;
+	int			mapy;
+/*
+**	RAY INFOS
+*/
 	double		camx;
 	double		ray_px;
 	double		ray_py;
 	double		ray_dx;
 	double		ray_dy;
-//RAY INFO
-	int			mapx;
-	int			mapy;
 	double		side_dx;
 	double		side_dy;
 	double		delta_dx;
@@ -164,29 +170,34 @@ typedef struct	s_wolf
 	int			hit;
 	int			side;
 	int			line_h;
-//DRAW
+/*
+**	DRAW COLUMN
+*/
+	int			color;
 	int			xi;
 	int			xf;
-//	int			yi;
-//	int			yf;
-//	int			text_num;
 	double		wall_x;
-//	int			text_x;
-//	int			text_y;
-	int			d;
-	int			y;
+/*
+**	SOUNDS
+*/
+	int			footsteps;
 }				t_wolf;
 
 void	start(t_wolf *wolf);
 void	new_graph(t_wolf *wolf);
-void	map(t_wolf *wolf);
 void	initialisation(t_wolf *wolf);
 
+void	map(t_wolf *wolf);
+void	map_0(t_wolf *wolf);
+void	map_1(t_wolf *wolf);
+void	map_2(t_wolf *wolf);
+void	map_3(t_wolf *wolf);
+
 void	algo(t_wolf *wolf);
+void	put_pixel(int x, t_wolf *wolf);
 
 int		echap(t_wolf *wolf);
-int		key(int k, t_wolf *wolf);
-
-void	put_pixel(int x, t_wolf *wolf);
+int		press(int k, t_wolf *wolf);
+int		release_key(int k, t_wolf *wolf);
 
 #endif

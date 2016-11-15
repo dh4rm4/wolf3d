@@ -6,7 +6,7 @@
 #    By: kboddez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/09 12:57:20 by kboddez           #+#    #+#              #
-#    Updated: 2016/11/11 09:05:14 by kboddez          ###   ########.fr        #
+#    Updated: 2016/11/15 09:25:28 by kboddez          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ LIB = libfdf.a
 MAIN = main.c
 
 SRC_NAME =  $(MAIN) start.c map.c initialisation.c algo.c \
-	echap.c key.c put_pixel.c
+	echap.c press.c release_key.c put_pixel.c
 
 GREEN = \033[33;32m
 YELLOW = \033[33;33m

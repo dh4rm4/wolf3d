@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialisation.c                                   :+:      :+:    :+:   */
+/*   release_key.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 09:30:52 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/15 10:43:46 by kboddez          ###   ########.fr       */
+/*   Created: 2016/11/15 09:17:19 by kboddez           #+#    #+#             */
+/*   Updated: 2016/11/15 10:44:31 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-void	initialisation(t_wolf *wolf)
+int	release_key(int k, t_wolf *wolf)
 {
-	P_X = 18;
-	P_Y = 12;
-	D_X = -1;
-	D_Y = 0;
-	PLANX = 0;
-	PLANY = 0.66;
-	MOVE_SPD = MOVE_SPD_VAL;
-	FOOTSTEPS = 0;
+	if (k == MOVE_UP || k == MOVE_DOWN)
+	{
+		system("killall afplay");
+		--FOOTSTEPS;
+	}
+	if (k == 257)
+		MOVE_SPD /= 1.7;
+	if (k == 53)
+		echap(wolf);
+	if (k == 18)
+		map_0(wolf);
+	else if (k == 19)
+		map_1(wolf);
+	else if (k == 20)
+		map_2(wolf);
+	else if (k == 21)
+		map_3(wolf);
+	if (k >= 18 && k <= 21)
+		new_graph(wolf);
+	return (0);
 }

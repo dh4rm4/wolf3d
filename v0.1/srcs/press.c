@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
+/*   press.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:03:01 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/14 18:16:50 by kboddez          ###   ########.fr       */
+/*   Created: 2016/11/15 09:05:19 by kboddez           #+#    #+#             */
+/*   Updated: 2016/11/15 10:47:33 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
 /*
-**	MANAGE MOVEMENT OF THE PLAYER
+**  MANAGE MOVEMENT OF THE PLAYER
 */
 
-static void	movement(int k, t_wolf *wolf)
+int	press(int k, t_wolf *wolf)
 {
-	//		printf("%f | %f | %f | %f\n", D_X, D_Y, PLANX, PLANY);
-	if (k == MOVE_LEFT)
+	if ((k == MOVE_DOWN || k == MOVE_UP) && FOOTSTEPS == 0)
+	{
+		system("afplay ./sounds/footsteps.mp3 &");
+		++FOOTSTEPS;
+	}
+    if (k == MOVE_LEFT)
 	{
 		DOLD_X = D_X;
 		D_X = D_X * cos(ROT_SPD) - D_Y * sin(ROT_SPD);
@@ -37,7 +41,7 @@ static void	movement(int k, t_wolf *wolf)
 		PLANX = PLANX * cos(-ROT_SPD) - PLANY * sin(-ROT_SPD);
 		PLANY = OLD_PLANX * sin(-ROT_SPD) + PLANY * cos(-ROT_SPD);
 	}
-	else if (k == MOVE_DOWN)
+	if (k == MOVE_DOWN)
 	{
 		if (MAP[(int)(P_X - D_X * MOVE_SPD)][(int)(P_Y)] == 0)
 			P_X -= D_X * MOVE_SPD;
@@ -51,22 +55,8 @@ static void	movement(int k, t_wolf *wolf)
 		if (MAP[(int)(P_X)][(int)(P_Y + D_Y * MOVE_SPD)] == 0)
 			P_Y += D_Y * MOVE_SPD;
 	}
+	if (k == 257)
+		MOVE_SPD *= 1.7;
 	new_graph(wolf);
-}
-
-
-
-/*
-**	MANAGE KEY HOOK
-*/
-
-int	key(int k, t_wolf *wolf)
-{
-	if (k == 53)
-		echap(wolf);
-	else if(k >= MOVE_LEFT && k <= MOVE_UP)
-		movement(k, wolf);
-//	if (k >= MOVE_LEFT && k <= 126)
-
 	return (0);
 }
