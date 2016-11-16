@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:18:50 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/08 11:00:39 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/16 11:02:24 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	echap(t_wolf *wolf)
 {
+	if (MUSIC == 1)
+		system("killall afplay");
 	exit(0);
 	return (0);
 }

@@ -6,13 +6,15 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:06:39 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/14 18:35:48 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/16 17:51:26 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-//CHANGE WIN_X PAR WINY et INVERSEMNET
+/*
+**	INITIALISE ALL VARIABLES
+*/
 
 static void	init(int x, t_wolf *wolf)
 {
@@ -27,6 +29,10 @@ static void	init(int x, t_wolf *wolf)
 	DELTA_DY = sqrt(1 + (RAY_DX * RAY_DX) / (RAY_DY * RAY_DY));
 	HIT = 0;
 }
+
+/*
+**	CALC ORIENTATION OF WALL
+*/
 
 static void	calc_dist(t_wolf *wolf)
 {
@@ -51,6 +57,10 @@ static void	calc_dist(t_wolf *wolf)
 		SIDE_DY = (MAPY + 1.0 - RAY_PY) * DELTA_DY;
 	}
 }
+
+/*
+**	FIND WALLS
+*/
 
 static void	find_wall(t_wolf *wolf)
 {
@@ -94,9 +104,6 @@ void		algo(t_wolf *wolf)
 		XF = LINE_H / 2 + WIN_Y / 2;
 		if (XF >= WIN_Y)
 			XF = WIN_Y - 1;
-		COLOR = 0x00FF00;
-		if (SIDE == 1)
-			COLOR /= 4;
 		put_pixel(x, wolf);
 	}
 }

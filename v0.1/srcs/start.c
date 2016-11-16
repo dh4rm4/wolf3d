@@ -6,7 +6,7 @@
 /*   By: kboddez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 10:25:38 by kboddez           #+#    #+#             */
-/*   Updated: 2016/11/15 09:53:22 by kboddez          ###   ########.fr       */
+/*   Updated: 2016/11/16 16:35:57 by kboddez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	start(t_wolf *wolf)
 	mlx_hook(WIN, 17, (1L << 17), echap, wolf);
 	mlx_hook(WIN, 2, (1L << 0), press, wolf);
 	mlx_hook(WIN, 3, (1L << 1), release_key, wolf);
+	mlx_loop_hook(MLX, movement, wolf);
 	mlx_loop(MLX);
 }
